@@ -47,7 +47,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto"
+            className="text-xl sm:text-2xl text-neutral-700 dark:text-muted-foreground max-w-3xl mx-auto"
           >
             Desarrollador Full Stack Junior apasionado por crear experiencias web innovadoras
           </motion.p>
@@ -57,9 +57,9 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-lg text-muted-foreground/80 max-w-2xl mx-auto"
+            className="text-lg text-neutral-600 dark:text-muted-foreground/80 max-w-2xl mx-auto"
           >
-            Especializado en React, Node.js y tecnologías modernas. 
+            Especializado en Next.js, React, Tailwind CSS, Kotlin, Java, Spring Boot y tecnologías modernas. 
             Buscando oportunidades para crecer y contribuir en proyectos desafiantes.
           </motion.p>
 
@@ -78,7 +78,8 @@ export function Hero() {
               Contactar
             </a>
             <a
-              href="/cv-andres-costas.pdf"
+              href="/Andrés_CostasMoreno_CV.pdf"
+              download
               className="inline-flex items-center gap-2 px-8 py-3 border border-border bg-background text-foreground rounded-lg font-medium hover:bg-accent transition-colors"
             >
               <Download className="w-5 h-5" />

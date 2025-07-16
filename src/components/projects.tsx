@@ -9,38 +9,18 @@ export function Projects() {
       title: "Portfolio Personal",
       description: "Portfolio web moderno y responsive desarrollado con Next.js 15, TypeScript y Tailwind CSS. Incluye modo oscuro/claro y animaciones suaves.",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-      image: "/portfolio-preview.jpg",
-      github: "https://github.com/CostasAndres/portfolio",
       live: "#",
+      mainLink: "https://github.com/CostasAndres/me",
       featured: true
     },
     {
-      title: "E-commerce Platform",
-      description: "Plataforma de comercio electrónico completa con carrito de compras, sistema de pagos y panel de administración.",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      image: "/ecommerce-preview.jpg",
-      github: "https://github.com/CostasAndres/ecommerce",
+      title: "AGL N1º Simulators",
+      description: "Diferentes simuladores industriales desarrollados en Unity con C#.",
+      technologies: ["Unity", "C#", "VR", "Blender"],
       live: "#",
+      mainLink: "https://www.linkedin.com/feed/update/urn:li:activity:7202974853103104001/",
       featured: true
     },
-    {
-      title: "Task Management App",
-      description: "Aplicación de gestión de tareas con drag & drop, filtros y persistencia de datos local.",
-      technologies: ["React", "TypeScript", "LocalStorage", "CSS Modules"],
-      image: "/task-app-preview.jpg",
-      github: "https://github.com/CostasAndres/task-manager",
-      live: "#",
-      featured: false
-    },
-    {
-      title: "Weather Dashboard",
-      description: "Dashboard del clima con API de OpenWeatherMap, gráficos interactivos y geolocalización.",
-      technologies: ["React", "Chart.js", "OpenWeather API", "Geolocation"],
-      image: "/weather-preview.jpg",
-      github: "https://github.com/CostasAndres/weather-app",
-      live: "#",
-      featured: false
-    }
   ]
 
   const containerVariants = {
@@ -59,7 +39,7 @@ export function Projects() {
   }
 
   return (
-    <section id="proyectos" className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-50 dark:bg-neutral-900/50">
+    <section id="proyectos" className="py-20 px-4 sm:px-6 lg:px-8 bg-theme-secondary dark:bg-neutral-900/50">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -68,10 +48,10 @@ export function Projects() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-theme-secondary dark:text-white mb-4">
             Mis Proyectos
           </h2>
-          <p className="text-lg text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto">
+          <p className="text-lg text-theme-secondary dark:text-neutral-300 max-w-3xl mx-auto">
             Una selección de mis trabajos más recientes y destacados
           </p>
         </motion.div>
@@ -87,13 +67,21 @@ export function Projects() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="group relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300"
+              className="group relative bg-theme-card dark:bg-neutral-900 border border-theme-medium dark:border-neutral-700 rounded-lg overflow-hidden hover:shadow-theme-md transition-all duration-300 cursor-pointer shadow-theme-sm"
             >
+              {/* Clickable overlay for entire card */}
+              <a
+                href={project.mainLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute inset-0 z-10"
+                aria-label={`Ver proyecto ${project.title}`}
+              />
               {/* Project Image Placeholder */}
               <div className="h-48 bg-gradient-to-br from-blue-600/10 to-blue-400/5 flex items-center justify-center">
                 <div className="text-center">
                   <Code className="w-12 h-12 text-blue-600 dark:text-blue-400 mx-auto mb-2" />
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400">{project.title}</p>
+                  <p className="text-sm text-theme-muted dark:text-neutral-400">{project.title}</p>
                 </div>
               </div>
 
@@ -110,44 +98,34 @@ export function Projects() {
                   )}
                 </div>
 
-                <p className="text-neutral-600 dark:text-neutral-300 mb-4 leading-relaxed">
+                <p className="text-theme-secondary dark:text-neutral-300 mb-4 leading-relaxed">
                   {project.description}
                 </p>
 
                 {/* Technologies */}
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white text-xs rounded-md"
-                    >
-                      {tech}
-                    </span>
+                                            <span
+                          key={tech}
+                          className="px-2 py-1 bg-theme-muted dark:bg-neutral-800 text-theme-primary dark:text-white text-xs rounded-md font-medium"
+                        >
+                          {tech}
+                        </span>
                   ))}
                 </div>
 
                 {/* Project Links */}
-                <div className="flex gap-3">
+                <div className="flex gap-3 relative z-20">
                   <a
-                    href={project.github}
+                    href={project.mainLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors text-sm font-medium"
+                    className="flex items-center gap-2 text-theme-muted dark:text-neutral-400 hover:text-theme-primary dark:hover:text-white transition-colors text-sm font-medium"
+                    onClick={(e) => e.stopPropagation()}
                   >
                     <Github className="w-4 h-4" />
-                    Código
+                    Ver Proyecto
                   </a>
-                  {project.live !== "#" && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors text-sm font-medium"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      Demo
-                    </a>
-                  )}
                 </div>
               </div>
 
@@ -165,7 +143,7 @@ export function Projects() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <p className="text-neutral-600 dark:text-neutral-300 mb-6">
+          <p className="text-theme-secondary dark:text-neutral-300 mb-6">
             ¿Te gusta lo que ves? ¡Echa un vistazo a más de mis proyectos!
           </p>
           <a

@@ -11,14 +11,14 @@ export function Experience() {
       location: "Remoto",
       period: "2023 - Presente",
       description: "Desarrollo de aplicaciones web completas utilizando React, Node.js y bases de datos modernas. Especializado en crear experiencias de usuario intuitivas y escalables.",
-      technologies: ["React", "Node.js", "TypeScript", "MongoDB", "PostgreSQL"],
+      technologies: ["React", "Next.js","Kotlin", "Java", "TypeScript", "MongoDB", "MySQL"],
       link: "#"
     },
     {
       title: "Proyectos Personales",
-      company: "Portfolio",
+      company: "Andres.dev",
       location: "España",
-      period: "2022 - Presente",
+      period: "2024 - Presente",
       description: "Desarrollo de proyectos personales para mejorar habilidades técnicas y crear un portfolio sólido. Enfoque en tecnologías modernas y mejores prácticas.",
       technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "Git", "Docker"],
       link: "https://github.com/CostasAndres"
@@ -27,10 +27,16 @@ export function Experience() {
 
   const education = [
     {
-      title: "Desarrollo Web Full Stack",
-      institution: "Bootcamp / Cursos Online",
-      period: "2022 - 2023",
-      description: "Formación intensiva en desarrollo web moderno, incluyendo frontend, backend y bases de datos."
+      title: "Desarrollo de aplicaciones multiplataforma",
+      institution: "IES Augusto González Linares",
+      period: "2021 - 2023",
+      description: "Formación intensiva en desarrollo de aplicaciones multiplataforma, incluyendo backend y bases de datos."
+    },
+    {
+      title: "Videojuegos y Realidad Virtual",
+      institution: "IES Augusto González Linares",
+      period: "2023 - 2024",
+      description: "Formación en videojuegos y realidad virtual, incluyendo Unity con uso de C#."
     }
   ]
 
@@ -44,10 +50,10 @@ export function Experience() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-theme-secondary dark:text-white mb-4">
             Experiencia
           </h2>
-          <p className="text-lg text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto">
+          <p className="text-lg text-theme-secondary dark:text-neutral-300 max-w-3xl mx-auto">
             Mi trayectoria profesional y formación académica
           </p>
         </motion.div>
@@ -100,7 +106,7 @@ export function Experience() {
                       </span>
                     </div>
                     
-                    <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                    <p className="text-theme-secondary dark:text-neutral-300 leading-relaxed">
                       {exp.description}
                     </p>
                     
@@ -171,7 +177,7 @@ export function Experience() {
                       </span>
                     </div>
                     
-                    <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                    <p className="text-theme-secondary dark:text-neutral-300 leading-relaxed">
                       {edu.description}
                     </p>
                   </div>
@@ -187,26 +193,26 @@ export function Experience() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="mt-12"
             >
-              <h4 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">
+              <h4 className="text-lg font-semibold text-theme-secondary dark:text-white mb-4">
                 Habilidades Adicionales
               </h4>
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-2">
-                  <h5 className="font-medium text-neutral-900 dark:text-white">Frontend</h5>
+                  <h5 className="font-medium text-theme-primary dark:text-white">Frontend</h5>
                   <div className="space-y-1">
-                    <div className="text-sm text-neutral-600 dark:text-neutral-300">• React & Next.js</div>
-                    <div className="text-sm text-neutral-600 dark:text-neutral-300">• TypeScript</div>
-                    <div className="text-sm text-neutral-600 dark:text-neutral-300">• Tailwind CSS</div>
-                    <div className="text-sm text-neutral-600 dark:text-neutral-300">• Framer Motion</div>
+                    <div className="text-sm text-theme-muted dark:text-neutral-300">• React & Next.js</div>
+                    <div className="text-sm text-theme-muted dark:text-neutral-300">• TypeScript</div>
+                    <div className="text-sm text-theme-muted dark:text-neutral-300">• Tailwind CSS</div>
+                    <div className="text-sm text-theme-muted dark:text-neutral-300">• Framer Motion</div>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h5 className="font-medium text-neutral-900 dark:text-white">Backend</h5>
+                  <h5 className="font-medium text-theme-primary dark:text-white">Backend</h5>
                   <div className="space-y-1">
-                    <div className="text-sm text-neutral-600 dark:text-neutral-300">• Node.js & Express</div>
-                    <div className="text-sm text-neutral-600 dark:text-neutral-300">• MongoDB & PostgreSQL</div>
-                    <div className="text-sm text-neutral-600 dark:text-neutral-300">• REST APIs</div>
-                    <div className="text-sm text-neutral-600 dark:text-neutral-300">• Git & GitHub</div>
+                    <div className="text-sm text-theme-muted dark:text-neutral-300">• Node.js & Express</div>
+                    <div className="text-sm text-theme-muted dark:text-neutral-300">• MongoDB & PostgreSQL</div>
+                    <div className="text-sm text-theme-muted dark:text-neutral-300">• REST APIs</div>
+                    <div className="text-sm text-theme-muted dark:text-neutral-300">• Git & GitHub</div>
                   </div>
                 </div>
               </div>

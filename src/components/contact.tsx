@@ -10,13 +10,35 @@ export function Contact() {
     email: "",
     message: ""
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Aquí puedes agregar la lógica para enviar el formulario
-    console.log("Form submitted:", formData)
-    // Reset form
-    setFormData({ name: "", email: "", message: "" })
+    setIsSubmitting(true)
+    setSubmitStatus("idle")
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        setSubmitStatus("success")
+        setFormData({ name: "", email: "", message: "" })
+      } else {
+        setSubmitStatus("error")
+      }
+    } catch (error) {
+      console.error("Error enviando mensaje:", error)
+      setSubmitStatus("error")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -57,10 +79,10 @@ export function Contact() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-theme-secondary dark:text-white mb-4">
             Contacto
           </h2>
-          <p className="text-lg text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto">
+          <p className="text-lg text-theme-primary dark:text-neutral-300 max-w-3xl mx-auto">
             ¿Tienes un proyecto en mente? ¡Me encantaría escucharlo!
           </p>
         </motion.div>
@@ -75,10 +97,10 @@ export function Contact() {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-semibold text-neutral-900 dark:text-white mb-6">
+              <h3 className="text-2xl font-semibold text-theme-secondary dark:text-white mb-6">
                 ¡Hablemos!
               </h3>
-              <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed mb-8">
+              <p className="text-theme-primary dark:text-neutral-300 leading-relaxed mb-8">
                 Estoy siempre abierto a nuevas oportunidades y proyectos interesantes. 
                 Si tienes una idea o quieres colaborar, no dudes en contactarme.
               </p>
@@ -96,14 +118,14 @@ export function Contact() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="flex items-center gap-4 p-4 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors group"
+                  className="flex items-center gap-4 p-4 rounded-lg bg-theme-secondary dark:bg-neutral-800 hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors group border border-theme-light dark:border-neutral-700"
                 >
                   <div className="p-2 rounded-lg bg-blue-600/10 dark:bg-blue-400/10 text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                     <method.icon className="w-5 h-5" />
                   </div>
                   <div>
                     <h4 className="font-medium text-neutral-900 dark:text-white">{method.title}</h4>
-                    <p className="text-sm text-neutral-500 dark:text-neutral-400">{method.value}</p>
+                    <p className="text-sm text-theme-muted dark:text-neutral-400">{method.value}</p>
                   </div>
                 </motion.a>
               ))}
@@ -115,13 +137,13 @@ export function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="p-6 bg-blue-600/5 dark:bg-blue-400/5 rounded-lg border border-blue-600/10 dark:border-blue-400/10"
+              className="p-6 bg-theme-secondary dark:bg-blue-400/5 rounded-lg border border-blue-600/10 dark:border-blue-400/10"
             >
               <h4 className="font-semibold text-neutral-900 dark:text-white mb-2 flex items-center gap-2">
                 <MessageSquare className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 Disponibilidad
               </h4>
-              <p className="text-sm text-neutral-600 dark:text-neutral-300">
+              <p className="text-sm text-theme-secondary dark:text-neutral-300">
                 Actualmente disponible para proyectos freelance y oportunidades laborales. 
                 Respuesta rápida garantizada.
               </p>
@@ -134,15 +156,15 @@ export function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-lg p-8"
+            className="bg-theme-card border border-theme-light rounded-lg p-8 shadow-theme-sm"
           >
-            <h3 className="text-2xl font-semibold text-neutral-900 dark:text-white mb-6">
-              Envíame un mensaje
-            </h3>
+                          <h3 className="text-2xl font-semibold text-theme-primary mb-6">
+                Envíame un mensaje
+              </h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-neutral-900 dark:text-white mb-2">
+                <label htmlFor="name" className="block text-sm font-medium text-theme-primary mb-2">
                   Nombre
                 </label>
                 <input
@@ -152,13 +174,15 @@ export function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 border border-theme-light rounded-lg bg-theme-card 
+                  text-theme-primary placeholder-theme-light 
+                  focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"
                   placeholder="Tu nombre completo"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-neutral-900 dark:text-white mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-theme-primary mb-2">
                   Email
                 </label>
                 <input
@@ -168,13 +192,13 @@ export function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 border border-theme-light rounded-lg bg-theme-card text-theme-primary placeholder-theme-light focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"
                   placeholder="tu@email.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-neutral-900 dark:text-white mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-theme-primary mb-2">
                   Mensaje
                 </label>
                 <textarea
@@ -184,18 +208,49 @@ export function Contact() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400 focus:border-transparent transition-colors resize-none"
+                  className="w-full px-4 py-3 border border-theme-light rounded-lg bg-theme-card text-theme-primary placeholder-theme-light focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors resize-none"
                   placeholder="Cuéntame sobre tu proyecto..."
                 />
               </div>
 
-                              <button
+                <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+                  disabled={isSubmitting}
+                  className="w-full inline-flex items-center justify-center gap-2 px-8 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg font-medium transition-colors shadow-sm"
                 >
-                <Send className="w-5 h-5" />
-                Enviar Mensaje
-              </button>
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      Enviando...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      Enviar Mensaje
+                    </>
+                  )}
+                </button>
+
+                {/* Mensajes de estado */}
+                {submitStatus === "success" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-green-700 dark:text-green-300 text-center"
+                  >
+                    ¡Mensaje enviado correctamente! Te responderé pronto.
+                  </motion.div>
+                )}
+
+                {submitStatus === "error" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-300 text-center"
+                  >
+                    Error al enviar el mensaje. Por favor, inténtalo de nuevo.
+                  </motion.div>
+                )}
             </form>
           </motion.div>
         </div>
