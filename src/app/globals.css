@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .light {
   --background: #ffffff;
@@ -71,29 +73,6 @@
   --border-medium: #4b5563;
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --font-sans: var(--font-inter);
 }
 
 body {
@@ -197,4 +176,114 @@ body {
 
 .shadow-theme-md {
   box-shadow: var(--shadow-md);
+}
+
+/* Estilos para mensajes del formulario */
+.form-message-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  border: 3px solid #047857;
+  box-shadow: 
+    0 4px 12px rgba(16, 185, 129, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.form-message-success::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.form-message-error {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+  border: 3px solid #b91c1c;
+  box-shadow: 
+    0 4px 12px rgba(239, 68, 68, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.form-message-error::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Versiones para modo oscuro */
+.dark .form-message-success {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  border-color: #065f46;
+  box-shadow: 
+    0 4px 12px rgba(5, 150, 105, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.dark .form-message-error {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  border-color: #991b1b;
+  box-shadow: 
+    0 4px 12px rgba(220, 38, 38, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Estilos para tarjetas de contacto */
+.contact-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.contact-card-title {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.contact-card-value {
+  color: #475569;
+  font-weight: 500;
+}
+
+/* Versiones para modo oscuro */
+.dark .contact-card {
+  background: #1e293b;
+  border-color: #374151;
+}
+
+.dark .contact-card:hover {
+  background: #334155;
+  border-color: #4b5563;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .contact-card-title {
+  color: #f8fafc;
+}
+
+.dark .contact-card-value {
+  color: #94a3b8;
 }

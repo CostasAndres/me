@@ -118,14 +118,14 @@ export function Contact() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="flex items-center gap-4 p-4 rounded-lg bg-theme-secondary dark:bg-neutral-800 hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors group border border-theme-light dark:border-neutral-700"
+                  className="flex items-center gap-4 p-4 rounded-lg contact-card group"
                 >
                   <div className="p-2 rounded-lg bg-blue-600/10 dark:bg-blue-400/10 text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                     <method.icon className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="font-medium text-neutral-900 dark:text-white">{method.title}</h4>
-                    <p className="text-sm text-theme-muted dark:text-neutral-400">{method.value}</p>
+                    <h4 className="font-medium contact-card-title">{method.title}</h4>
+                    <p className="text-sm contact-card-value">{method.value}</p>
                   </div>
                 </motion.a>
               ))}
@@ -236,7 +236,7 @@ export function Contact() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-green-700 dark:text-green-300 text-center"
+                    className="p-4 rounded-lg text-center form-message-success"
                   >
                     ¡Mensaje enviado correctamente! Te responderé pronto.
                   </motion.div>
@@ -246,7 +246,7 @@ export function Contact() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-300 text-center"
+                    className="p-4 rounded-lg text-center form-message-error"
                   >
                     Error al enviar el mensaje. Por favor, inténtalo de nuevo.
                   </motion.div>

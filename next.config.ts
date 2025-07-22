@@ -42,10 +42,8 @@ const nextConfig: NextConfig = {
   // Configuración de compresión
   compress: true,
   
-  // Optimización de bundles
-  experimental: {
-    optimizeCss: true,
-  },
+  // Configuración para Docker (standalone output)
+  output: 'standalone',
 };
 
 export default nextConfig;
