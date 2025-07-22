@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
         pathname: '/u/**',
       },
     ],
+    unoptimized: true,
   },
   
   // Headers de seguridad
@@ -42,8 +43,9 @@ const nextConfig: NextConfig = {
   // Configuración de compresión
   compress: true,
   
-  // Configuración para Docker (standalone output)
-  output: 'standalone',
+  // Configuración para Cloudflare Pages
+  output: 'export',
+  trailingSlash: true,
 };
 
 export default nextConfig;

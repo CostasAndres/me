@@ -1,14 +1,7 @@
 name = "portfolio"
-main = "src/index.js"
 compatibility_date = "2024-01-01"
 
-[env.production]
-name = "portfolio-prod"
-
-[env.staging]
-name = "portfolio-staging"
-
-# Configuración para Pages (si usas Pages)
 [pages]
 name = "portfolio"
-compatibility_date = "2024-01-01" 
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "out" 
