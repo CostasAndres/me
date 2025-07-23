@@ -14,6 +14,14 @@ export function Projects() {
       featured: true
     },
     {
+      title: "Documentación Cloudflare",
+      description: "Guía completa para desplegar aplicaciones Next.js en Cloudflare Pages. Incluye configuración, optimización y solución de problemas.",
+      technologies: ["Cloudflare Pages", "Next.js", "Wrangler CLI", "Documentación"],
+      live: "/documentacion",
+      mainLink: "/documentacion",
+      featured: true
+    },
+    {
       title: "AGL N1º Simulators",
       description: "Diferentes simuladores industriales desarrollados en Unity con C#.",
       technologies: ["Unity", "C#", "VR", "Blender"],

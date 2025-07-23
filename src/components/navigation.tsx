@@ -12,6 +12,7 @@ export function Navigation() {
     { href: "#sobre-mi", label: "Sobre mí" },
     { href: "#experiencia", label: "Experiencia" },
     { href: "#proyectos", label: "Proyectos" },
+    { href: "#documentacion", label: "Documentación" },
     { href: "#contacto", label: "Contacto" },
   ]
 
