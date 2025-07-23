@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Github, ExternalLink, Code, Globe, Database } from "lucide-react"
+import { Github, ExternalLink, Code, Globe, Database, BookOpen } from "lucide-react"
 
 export function Projects() {
   const projects = [
@@ -80,8 +80,8 @@ export function Projects() {
               {/* Clickable overlay for entire card */}
               <a
                 href={project.mainLink}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={project.title === "Documentación Cloudflare" ? "_self" : "_blank"}
+                rel={project.title === "Documentación Cloudflare" ? "" : "noopener noreferrer"}
                 className="absolute inset-0 z-10"
                 aria-label={`Ver proyecto ${project.title}`}
               />
@@ -126,13 +126,22 @@ export function Projects() {
                 <div className="flex gap-3 relative z-20">
                   <a
                     href={project.mainLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={project.title === "Documentación Cloudflare" ? "_self" : "_blank"}
+                    rel={project.title === "Documentación Cloudflare" ? "" : "noopener noreferrer"}
                     className="flex items-center gap-2 text-theme-muted dark:text-neutral-400 hover:text-theme-primary dark:hover:text-white transition-colors text-sm font-medium"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <Github className="w-4 h-4" />
-                    Ver Proyecto
+                    {project.title === "Documentación Cloudflare" ? (
+                      <>
+                        <BookOpen className="w-4 h-4" />
+                        Ver Documentación
+                      </>
+                    ) : (
+                      <>
+                        <Github className="w-4 h-4" />
+                        Ver Proyecto
+                      </>
+                    )}
                   </a>
                 </div>
               </div>
