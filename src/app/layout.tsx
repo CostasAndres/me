@@ -11,6 +11,10 @@ export const metadata: Metadata = {
   keywords: ['desarrollador', 'full stack', 'react', 'node.js', 'javascript', 'typescript', 'junior developer'],
   authors: [{ name: 'Andrés Costas Moreno' }],
   creator: 'Andrés Costas Moreno',
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
   openGraph: {
     title: 'Andrés Costas Moreno - Desarrollador Full Stack Junior',
     description: 'Desarrollador Full Stack Junior apasionado por crear experiencias web innovadoras.',
@@ -35,12 +39,36 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme');
+                  var systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                  
+                  if (!theme || theme === 'system') {
+                    document.documentElement.classList.add(systemTheme);
+                  } else {
+                    document.documentElement.classList.add(theme);
+                  }
+                } catch (e) {
+                  var systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                  document.documentElement.classList.add(systemTheme);
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
+          storageKey="theme"
         >
           {children}
         </ThemeProvider>

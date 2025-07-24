@@ -14,14 +14,6 @@ export function Projects() {
       featured: true
     },
     {
-      title: "Documentación Cloudflare",
-      description: "Guía completa para desplegar aplicaciones Next.js en Cloudflare Pages. Incluye configuración, optimización y solución de problemas.",
-      technologies: ["Cloudflare Pages", "Next.js", "Wrangler CLI", "Documentación"],
-      live: "/documentacion",
-      mainLink: "/documentacion",
-      featured: true
-    },
-    {
       title: "AGL N1º Simulators",
       description: "Diferentes simuladores industriales desarrollados en Unity con C#.",
       technologies: ["Unity", "C#", "VR", "Blender"],
@@ -80,8 +72,8 @@ export function Projects() {
               {/* Clickable overlay for entire card */}
               <a
                 href={project.mainLink}
-                target={project.title === "Documentación Cloudflare" ? "_self" : "_blank"}
-                rel={project.title === "Documentación Cloudflare" ? "" : "noopener noreferrer"}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="absolute inset-0 z-10"
                 aria-label={`Ver proyecto ${project.title}`}
               />
@@ -113,12 +105,12 @@ export function Projects() {
                 {/* Technologies */}
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.technologies.map((tech) => (
-                                            <span
-                          key={tech}
-                          className="px-2 py-1 bg-theme-muted dark:bg-neutral-800 text-theme-primary dark:text-white text-xs rounded-md font-medium"
-                        >
-                          {tech}
-                        </span>
+                    <span
+                      key={tech}
+                      className="px-2 py-1 bg-theme-muted dark:bg-neutral-800 text-theme-primary dark:text-white text-xs rounded-md font-medium"
+                    >
+                      {tech}
+                    </span>
                   ))}
                 </div>
 
@@ -126,22 +118,13 @@ export function Projects() {
                 <div className="flex gap-3 relative z-20">
                   <a
                     href={project.mainLink}
-                    target={project.title === "Documentación Cloudflare" ? "_self" : "_blank"}
-                    rel={project.title === "Documentación Cloudflare" ? "" : "noopener noreferrer"}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-2 text-theme-muted dark:text-neutral-400 hover:text-theme-primary dark:hover:text-white transition-colors text-sm font-medium"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    {project.title === "Documentación Cloudflare" ? (
-                      <>
-                        <BookOpen className="w-4 h-4" />
-                        Ver Documentación
-                      </>
-                    ) : (
-                      <>
-                        <Github className="w-4 h-4" />
-                        Ver Proyecto
-                      </>
-                    )}
+                    <Github className="w-4 h-4" />
+                    Ver Proyecto
                   </a>
                 </div>
               </div>
