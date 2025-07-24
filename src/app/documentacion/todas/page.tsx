@@ -1,13 +1,12 @@
-import { Metadata } from 'next'
+"use client"
+
+import { useState } from 'react'
 import { BookOpen, FileText, Globe, Calendar, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
-export const metadata: Metadata = {
-  title: 'Todas las Documentaciones - Andrés Costas Moreno',
-  description: 'Colección completa de documentaciones técnicas y guías',
-}
-
 export default function TodasDocumentacionesPage() {
+  const [activeFilters, setActiveFilters] = useState<string[]>([])
+
   const documentations = [
     {
       title: "Guía de Instalación",
@@ -32,7 +31,7 @@ export default function TodasDocumentacionesPage() {
     {
       title: "Documentación Cloudflare",
       description: "Guía completa para desplegar aplicaciones Next.js en Cloudflare Pages. Incluye configuración, optimización y solución de problemas.",
-      technologies: ["Cloudflare Pages", "Next.js", "Wrangler CLI", "Documentación"],
+      technologies: ["Cloudflare Pages", "Next.js", "Wrangler CLI", "Documentación", "Despliegue"],
       link: "/documentacion/cloudflare",
       icon: Globe,
       featured: false,
@@ -41,8 +40,32 @@ export default function TodasDocumentacionesPage() {
     },
   ]
 
+  // Categorías disponibles
+  const categories = [
+    { name: "Guía", count: documentations.filter(doc => doc.technologies.includes("Guía")).length },
+    { name: "Documentación", count: documentations.filter(doc => doc.technologies.includes("Documentación")).length },
+    { name: "Despliegue", count: documentations.filter(doc => doc.technologies.includes("Despliegue")).length }
+  ]
+
+  // Función para alternar filtros
+  const toggleFilter = (category: string) => {
+    setActiveFilters(prev => 
+      prev.includes(category) 
+        ? prev.filter(f => f !== category)
+        : [...prev, category]
+    )
+  }
+
+  // Filtrar documentación basada en filtros activos (función AND)
+  const filteredDocumentations = activeFilters.length === 0 
+    ? documentations 
+    : documentations.filter(doc => {
+        // Si hay múltiples filtros activos, la documentación debe pertenecer a TODAS las categorías
+        return activeFilters.every(filter => doc.technologies.includes(filter))
+      })
+
   // Ordenar documentos por fecha (más reciente primero)
-  const sortedDocumentations = documentations.sort((a, b) => {
+  const sortedDocumentations = filteredDocumentations.sort((a, b) => {
     return new Date(b.date).getTime() - new Date(a.date).getTime()
   })
 
@@ -78,6 +101,29 @@ export default function TodasDocumentacionesPage() {
               {new Set(documentations.map(doc => doc.category)).size}
             </div>
             <div className="text-theme-secondary dark:text-neutral-300">Categorías</div>
+          </div>
+        </div>
+
+        {/* Filtros de categorías */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-semibold mb-6 text-center text-neutral-900 dark:text-white">Filtrar por Categoría</h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            {categories.map((category) => (
+              <button
+                key={category.name}
+                onClick={() => toggleFilter(category.name)}
+                className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 border-2 ${
+                  activeFilters.includes(category.name)
+                    ? 'bg-green-600 border-green-600 text-white shadow-lg scale-105'
+                    : 'bg-theme-card dark:bg-neutral-900 border-theme-medium dark:border-neutral-700 text-theme-secondary dark:text-neutral-300 hover:border-green-600 dark:hover:border-green-400 hover:text-green-600 dark:hover:text-green-400'
+                }`}
+              >
+                <div className="text-center">
+                  <div className="font-semibold">{category.name}</div>
+                  <div className="text-xs opacity-75">{category.count} documentación</div>
+                </div>
+              </button>
+            ))}
           </div>
         </div>
 
@@ -142,20 +188,20 @@ export default function TodasDocumentacionesPage() {
           ))}
         </div>
 
-        {/* Categories Section */}
-        <div className="mt-16">
-          <h2 className="text-2xl font-semibold mb-6 text-center text-neutral-900 dark:text-white">Categorías</h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            {Array.from(new Set(documentations.map(doc => doc.category))).map((category) => (
-              <div key={category} className="bg-theme-card dark:bg-neutral-900 border border-theme-medium dark:border-neutral-700 rounded-lg p-4 text-center">
-                <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">{category}</h3>
-                <p className="text-theme-secondary dark:text-neutral-300 text-sm">
-                  {documentations.filter(doc => doc.category === category).length} documentación{documentations.filter(doc => doc.category === category).length !== 1 ? 'es' : ''}
-                </p>
-              </div>
-            ))}
+        {/* Mensaje cuando no hay resultados */}
+        {sortedDocumentations.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-theme-secondary dark:text-neutral-300 text-lg mb-4">
+              No se encontraron documentaciones con los filtros seleccionados.
+            </p>
+            <button
+              onClick={() => setActiveFilters([])}
+              className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors"
+            >
+              Limpiar Filtros
+            </button>
           </div>
-        </div>
+        )}
 
         {/* Call to Action */}
         <div className="text-center mt-16">
